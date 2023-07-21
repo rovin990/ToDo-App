@@ -1,0 +1,58 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="heading-container">
+                <% if(locals.todoType) { %>
+                <h1 class="heading"><%= day %> ,<%= month %> <%= date %> </h1>
+                <% } else { %>
+                    <h1 class="heading">Work List!</h1>
+                <% } %>
+            </div>
+            
+            
+            <table class="table ">
+            <% 
+                if(locals.items){
+                for(var i=0;i<items.length;i++){ %>
+                <tbody>
+
+                <tr >
+                    <td>
+                        <input id="checkid"  type="checkbox" value="test" onclick="Onclick('<%= i %>')"/>
+                    </td>
+                    <td><p class="items" id="item<%= i %>"><%= items[i] %></p></td>
+                </tr>
+                <% }
+             } %>
+                <tr >
+                    <form class="form-inline"  method="POST" action="/addTODO">
+                        <td>
+                        <input type="text" name="taskType">
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary mb-2">new task</button>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+<script>
+    function Onclick(i){
+       var domObj = document.querySelector("#item"+i);
+        domObj.classList.add("strike");
+    
+
+
+    }
+    
+    </script>
+
+<%- include("partials/footer") %>
